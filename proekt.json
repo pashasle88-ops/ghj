@@ -1,0 +1,25 @@
+{
+    "project": "perspektiva-tc",
+    "version": "1.0.0",
+    "deploy": {
+        "hosting": "vercel",
+        "domain": "perspektiva-tc.ru",
+        "ssl": true,
+        "cdn": "cloudflare"
+    },
+    "analytics": {
+        "ga4": "G-XXXXXXXXXX",
+        "yandex_metrika": "12345678",
+        "google_ads": "AW-XXXXXXXXX"
+    },
+    "integrations": {
+        "crm": "https://crm.example.com/webhook",
+        "telegram_bot": "YOUR_BOT_TOKEN",
+        "email_service": "info@perspektiva-tc.ru"
+    },
+    "seo": {
+        "sitemap": "/sitemap.xml",
+        "robots": "/robots.txt",
+        "schema": true
+    }
+}
