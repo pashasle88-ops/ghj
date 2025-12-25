@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Генератор изображений</title>
+    <script>
+        function generateImage(text, bgColor, fileName, isRound = false) {
+            const canvas = document.createElement('canvas');
+            const size = isRound ? 400 : 600;
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            if (isRound) {
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+                ctx.fillStyle = bgColor;
+                ctx.fill();
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, size/2, size/2);
+            } else {
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 32px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, canvas.width/2, canvas.height/2);
+            }
+            
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+        
+        function generateAll() {
+            const images = [
+                {text: 'ПЕРСПЕКТИВА ТЦ', bg: '#1a3a8f', name: 'logo.jpg', round: false},
+                {text: 'ДОМОФОНЫ', bg: '#1a3a8f', name: 'service-domofon.jpg', round: false},
+                {text: 'ВИДЕОНАБЛЮДЕНИЕ', bg: '#1a3a8f', name: 'service-camera.jpg', round: false},
+                {text: 'ШЛАГБАУМЫ', bg: '#1a3a8f', name: 'service-shlagbaum.jpg', round: false},
+                {text: 'Евгений', bg: '#1a3a8f', name: 'team-1.jpg', round: true},
+                {text: 'Алексей', bg: '#1a3a8f', name: 'team-2.jpg', round: true},
+                {text: 'Мария', bg: '#1a3a8f', name: 'team-3.jpg', round: true},
+                {text: 'Ольга', bg: '#1a3a8f', name: 'team-4.jpg', round: true},
+                {text: 'ЖК "Солнечный"', bg: '#2a4ba8', name: 'portfolio-1.jpg', round: false},
+                {text: 'Бизнес-центр', bg: '#2a4ba8', name: 'portfolio-2.jpg', round: false}
+            ];
+            
+            images.forEach(img => {
+                setTimeout(() => {
+                    generateImage(img.text, img.bg, img.name, img.round);
+                }, 100);
+            });
+            
+            alert('Изображения будут скачаны по одному. Разрешите скачивание нескольких файлов.');
+        }
+    </script>
+</head>
+<body style="padding: 20px; font-family: Arial;">
+    <h2>Генератор placeholder изображений</h2>
+    <button onclick="generateAll()" style="padding: 10px 20px; font-size: 16px;">
+        Сгенерировать все изображения
+    </button>
+    <p style="margin-top: 20px; color: #666;">
+        После скачивания создайте папку images/ и поместите туда все файлы.
+    </p>
+</body>
+</html>
